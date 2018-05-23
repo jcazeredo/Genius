@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Genius</class>
+ <widget class="QMainWindow" name="Genius">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>451</width>
+    <height>498</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Genius</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:#1d1d1d;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="verde">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#verde{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_verde.png&quot;);
+}
+
+#verde:pressed{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_verdeAct.png&quot;);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="vermelho">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>20</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#vermelho{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_vermelho.png&quot;);
+}
+
+#vermelho:pressed{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_vermelhoAct.png&quot;);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="azul">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>230</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#azul{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_azul.png&quot;);
+}
+
+#azul:pressed{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_azulAct.png&quot;);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="amarelo">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>230</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#amarelo{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_amarelo.png&quot;);
+}
+
+#amarelo:pressed{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_amareloAct.png&quot;);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="logo">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>160</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#logo{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/logo.png&quot;);
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="onoff">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>280</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#onoff{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bt_off.png&quot;);
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bg_logo">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>120</y>
+      <width>211</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#bg_logo{
+background-color:transparent;
+border-image: url(&quot;D:/Dropbox Oficial/Dropbox/Faculdade/UFRGS/Indo/TCP/Genius/genius/bg_logo.png&quot;);
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="pontuacao">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>240</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>41</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <kerning>true</kerning>
+     </font>
+    </property>
+    <property name="value" stdset="0">
+     <double>0.000000000000000</double>
+    </property>
+    <property name="intValue" stdset="0">
+     <number>0</number>
+    </property>
+   </widget>
+   <zorder>azul</zorder>
+   <zorder>bg_logo</zorder>
+   <zorder>vermelho</zorder>
+   <zorder>amarelo</zorder>
+   <zorder>logo</zorder>
+   <zorder>onoff</zorder>
+   <zorder>verde</zorder>
+   <zorder>pontuacao</zorder>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>451</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
