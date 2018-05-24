@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pygame
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
 
 from Mediado import Mediado
 
@@ -23,12 +23,40 @@ class Interface(Mediado):
 
         self.configuraUi()
         self.funcoesBotoes()
+        self.efeitoInicializacao()
 
+    def efeitoInicializacao(self):
         self.ligarAmarelo()
-        QtCore.QTimer.singleShot(20000, lambda: int(9))
         self.ligarAzul()
         self.ligarVerde()
         self.ligarVermelho()
+
+    def efeitoErro(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load('src/sounds/fail.mp3')
+        pygame.mixer.music.play(0)
+
+        self.botaoAmarelo.setDown(True)
+        QtCore.QTimer.singleShot(2800, lambda: self.botaoAmarelo.setDown(False))
+        self.botaoAmarelo.setCheckable(True)
+        self.botaoAmarelo.setChecked(True)
+
+        self.botaoAzul.setDown(True)
+        QtCore.QTimer.singleShot(2800, lambda: self.botaoAzul.setDown(False))
+        self.botaoAzul.setCheckable(True)
+        self.botaoAzul.setChecked(True)
+
+        self.botaoVerde.setDown(True)
+        QtCore.QTimer.singleShot(2800, lambda: self.botaoVerde.setDown(False))
+        self.botaoVerde.setCheckable(True)
+        self.botaoVerde.setChecked(True)
+
+        self.botaoVermelho.setDown(True)
+        QtCore.QTimer.singleShot(2800, lambda: self.botaoVermelho.setDown(False))
+        self.botaoVermelho.setCheckable(True)
+        self.botaoVermelho.setChecked(True)
+
+        self.pausa(2800)
 
     def configuraUi(self):
         self.janela.setObjectName("Genius")
@@ -129,25 +157,45 @@ class Interface(Mediado):
 
     def funcoesBotoes(self):
         self.botaoOnOff.clicked.connect(self.mediador.ligarDesligar)
-        self.botaoAmarelo.clicked.connect(self.ligarAmarelo)
-        self.botaoAzul.clicked.connect(self.ligarAzul)
-        self.botaoVerde.clicked.connect(self.ligarVerde)
-        self.botaoVermelho.clicked.connect(self.ligarVermelho)
+        self.botaoAmarelo.clicked.connect(self.pressionarAmarelo)
+        self.botaoAzul.clicked.connect(self.pressionarAzul)
+        self.botaoVerde.clicked.connect(self.pressionarVerde)
+        self.botaoVermelho.clicked.connect(self.pressionarVermelho)
 
-    def pausa(self, i):
-        i += 1
-        if i < 999:
-            QtCore.QTimer.singleShot(2000, lambda: self.pausa(i))
+    def atualizarPontuacao(self, pontuacao):
+        self.pontuacao.display(pontuacao)
+        self.pausa()
+
+    def pressionarAmarelo(self):
+        self.ligarAmarelo()
+        self.mediador.botaoPressionado("amarelo")
+
+    def pressionarAzul(self):
+        self.ligarAzul()
+        self.mediador.botaoPressionado("azul")
+
+    def pressionarVerde(self):
+        self.ligarVerde()
+        self.mediador.botaoPressionado("verde")
+
+    def pressionarVermelho(self):
+        self.ligarVermelho()
+        self.mediador.botaoPressionado("vermelho")
+
+    @staticmethod
+    def pausa(ms=1000):
+        QtTest.QTest.qWait(ms)
 
     def iniciarJogo(self):
-        self.pausa(1)
-        self.ligarAmarelo()
-        self.pausa(1)
         self.botaoOnOff.setStyleSheet("#botaoOnOff{\n"
                                       "background-color:transparent;\n"
                                       "border-image: url(\"src/images/bt_on.png\");\n"
                                       "}\n"
                                       "")
+
+    def jogadaErrada(self):
+        self.efeitoErro()
+        self.desligarJogo()
 
     def desligarJogo(self):
         self.botaoOnOff.setStyleSheet("#botaoOnOff{\n"
@@ -157,30 +205,22 @@ class Interface(Mediado):
                                       "")
 
     def novaSequencia(self, sequencia):
-        import time
-
-        self.ligarVermelho()
-
         for cor in sequencia:
             if cor == "amarelo":
                 self.ligarAmarelo()
-                time.sleep(1)
+                self.pausa()
 
             elif cor == "azul":
                 self.ligarAzul()
-                time.sleep(1)
+                self.pausa()
 
             elif cor == "verde":
-                self.ligarAzul()
-                time.sleep(1)
+                self.ligarVerde()
+                self.pausa()
 
             elif cor == "vermelho":
                 self.ligarVermelho()
-                time.sleep(1)
-
-            self.pausa(1)
-            self.ligarAmarelo()
-            self.pausa(1)
+                self.pausa()
 
     def desabilitarBotoes(self):
         self.botaoAmarelo.setEnabled(False)
@@ -195,36 +235,36 @@ class Interface(Mediado):
         self.botaoVermelho.setEnabled(True)
 
     def ligarAmarelo(self):
-        # pygame.mixer.init()
-        # pygame.mixer.music.load('src/sounds/amarelo.mp3')
-        # pygame.mixer.music.play(0)
+        pygame.mixer.init()
+        pygame.mixer.music.load('src/sounds/amarelo.mp3')
+        pygame.mixer.music.play(0)
         self.botaoAmarelo.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoAmarelo.setDown(False))
         self.botaoAmarelo.setCheckable(True)
         self.botaoAmarelo.setChecked(True)
 
     def ligarAzul(self):
-        # pygame.mixer.init()
-        # pygame.mixer.music.load('src/sounds/azul.mp3')
-        # pygame.mixer.music.play(0)
+        pygame.mixer.init()
+        pygame.mixer.music.load('src/sounds/azul.mp3')
+        pygame.mixer.music.play(0)
         self.botaoAzul.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoAzul.setDown(False))
         self.botaoAzul.setCheckable(True)
         self.botaoAzul.setChecked(True)
 
     def ligarVerde(self):
-        # pygame.mixer.init()
-        # pygame.mixer.music.load('src/sounds/verde.mp3')
-        # pygame.mixer.music.play(0)
+        pygame.mixer.init()
+        pygame.mixer.music.load('src/sounds/verde.mp3')
+        pygame.mixer.music.play(0)
         self.botaoVerde.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoVerde.setDown(False))
         self.botaoVerde.setCheckable(True)
         self.botaoVerde.setChecked(True)
 
     def ligarVermelho(self):
-        # pygame.mixer.init()
-        # pygame.mixer.music.load('src/sounds/vermelho.mp3')
-        # pygame.mixer.music.play(0)
+        pygame.mixer.init()
+        pygame.mixer.music.load('src/sounds/vermelho.mp3')
+        pygame.mixer.music.play(0)
         self.botaoVermelho.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoVermelho.setDown(False))
         self.botaoVermelho.setCheckable(True)

@@ -7,27 +7,48 @@ class ControleJogo(Mediado):
         super().__init__(mediador)
         self.coresSequencia = None
         self.jogoIniciado = False
+        self.jogada = 0
+        self.pontos = 0
 
     def iniciarJogo(self):
         self.coresSequencia = Sequencia()
         self.jogoIniciado = True
 
     def novaSequencia(self):
-        self.coresSequencia.geraSequencia
-        return self.coresSequencia.obterSequecia
+        self.coresSequencia.geraSequencia()
+        return self.coresSequencia.obterSequencia
 
-    def botaoPressionado(self, cor_botao):
-        pass
+    def checaJogada(self, cor):
+        sequencia = self.coresSequencia.obterSequencia
+        corCorreta = sequencia[self.jogada]
 
-    def botaoCorreto(self):
-        pass
+        self.jogada = self.jogada + 1
+        if cor == corCorreta:
+            return True
 
-    def botaoErrado(self):
-        pass
+        return False
+
+    @property
+    def obterJogadasRestantes(self):
+        tamanhoSequencia = self.coresSequencia.obterTamanho
+        return tamanhoSequencia - self.jogada
+
+    def atualizarPontuacao(self):
+        self.pontos = self.pontos + 1
+
+    def zeraJogadas(self):
+        self.jogada = 0
+
+    @property
+    def obterPontuacao(self):
+        return self.pontos
 
     @property
     def estaLigado(self):
         return self.jogoIniciado
 
     def desligarJogo(self):
+        self.coresSequencia = None
         self.jogoIniciado = False
+        self.jogada = 0
+        self.pontos = 0
