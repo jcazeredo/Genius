@@ -273,7 +273,7 @@ class Interface(Mediado):
         QtCore.QTimer.singleShot(400, lambda: self.botaoAmarelo.setDown(False))
         self.botaoAmarelo.setCheckable(True)
         self.botaoAmarelo.setChecked(True)
-        self.pausa(500)
+        self.pausa(400)
 
     def ligarAzul(self):
         pygame.mixer.init()
@@ -283,7 +283,8 @@ class Interface(Mediado):
         QtCore.QTimer.singleShot(400, lambda: self.botaoAzul.setDown(False))
         self.botaoAzul.setCheckable(True)
         self.botaoAzul.setChecked(True)
-        self.pausa(500)
+        self.pausa(400)
+
 
     def ligarVerde(self):
         pygame.mixer.init()
@@ -293,7 +294,7 @@ class Interface(Mediado):
         QtCore.QTimer.singleShot(400, lambda: self.botaoVerde.setDown(False))
         self.botaoVerde.setCheckable(True)
         self.botaoVerde.setChecked(True)
-        self.pausa(500)
+        self.pausa(400)
 
     def ligarVermelho(self):
         pygame.mixer.init()
