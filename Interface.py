@@ -238,20 +238,28 @@ class Interface(Mediado):
     def tocaSequencia(self, sequencia):
         for cor in sequencia:
             if cor == "amarelo":
+                self.desabilitarBotoes()
                 self.ligarAmarelo()
                 self.pausa()
+                self.habilitarBotoes()
 
             elif cor == "azul":
+                self.desabilitarBotoes()
                 self.ligarAzul()
                 self.pausa()
+                self.habilitarBotoes()
 
             elif cor == "verde":
+                self.desabilitarBotoes()
                 self.ligarVerde()
                 self.pausa()
+                self.habilitarBotoes()
 
             elif cor == "vermelho":
+                self.desabilitarBotoes()
                 self.ligarVermelho()
                 self.pausa()
+                self.habilitarBotoes()
 
     def desabilitarBotoes(self):
         self.botaoAmarelo.setEnabled(False)
