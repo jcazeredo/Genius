@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
 import pygame
 from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
 
-from Mediado import Mediado
 
-
-class Interface(Mediado):
+class Interface:
     def __init__(self, janela, mediador):
-        super().__init__(mediador)
+        self.mediador = mediador
         self.janela = janela
         self.centralwidget = QtWidgets.QWidget(self.janela)
         self.botaoVerde = QtWidgets.QPushButton(self.centralwidget)
@@ -179,7 +176,7 @@ class Interface(Mediado):
         self.statusbar.setObjectName("statusbar")
         self.janela.setStatusBar(self.statusbar)
         _translate = QtCore.QCoreApplication.translate
-        self.janela.setWindowTitle(_translate("Genius", "Minecraft"))
+        self.janela.setWindowTitle(_translate("Genius", "Genius"))
         QtCore.QMetaObject.connectSlotsByName(self.janela)
 
     def funcoesBotoes(self):
@@ -240,25 +237,25 @@ class Interface(Mediado):
             if cor == "amarelo":
                 self.desabilitarBotoes()
                 self.ligarAmarelo()
-                self.pausa()
+                self.pausa(300)
                 self.habilitarBotoes()
 
             elif cor == "azul":
                 self.desabilitarBotoes()
                 self.ligarAzul()
-                self.pausa()
+                self.pausa(300)
                 self.habilitarBotoes()
 
             elif cor == "verde":
                 self.desabilitarBotoes()
                 self.ligarVerde()
-                self.pausa()
+                self.pausa(300)
                 self.habilitarBotoes()
 
             elif cor == "vermelho":
                 self.desabilitarBotoes()
                 self.ligarVermelho()
-                self.pausa()
+                self.pausa(300)
                 self.habilitarBotoes()
 
     def desabilitarBotoes(self):
@@ -292,7 +289,6 @@ class Interface(Mediado):
         self.botaoAzul.setCheckable(True)
         self.botaoAzul.setChecked(True)
         self.pausa(400)
-
 
     def ligarVerde(self):
         pygame.mixer.init()

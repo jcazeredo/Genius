@@ -7,6 +7,7 @@ class Mediador:
         jogoIniciado = self.controle.estaLigado
         if jogoIniciado:
             self.interface.desligarJogo()
+            self.interface.atualizarPontuacao(0)
             self.controle.desligarJogo()
         else:
             self.interface.iniciarJogo()

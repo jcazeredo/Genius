@@ -1,10 +1,9 @@
-from Mediado import Mediado
 from Sequencia import Sequencia
 
 
-class ControleJogo(Mediado):
+class ControleJogo:
     def __init__(self, mediador):
-        super().__init__(mediador)
+        self.mediador = mediador
         self.coresSequencia = None
         self.jogoIniciado = False
         self.jogada = 0
