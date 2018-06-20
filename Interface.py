@@ -1,4 +1,6 @@
 import pygame
+from ControleSom import ControleSom
+from ControleTop import ControleTop
 from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
 
 
@@ -6,11 +8,19 @@ class Interface:
     def __init__(self, janela, mediador):
         self.mediador = mediador
         self.janela = janela
+        self.som = ControleSom()
+        self.ranking = ControleTop()
         self.centralwidget = QtWidgets.QWidget(self.janela)
+        self.inserirNome = QtWidgets.QLineEdit(self.janela)
+        self.botaoOK = QtWidgets.QPushButton('OK', self.janela)
+        self.textoNome = QtWidgets.QStatusBar(self.janela)
         self.botaoVerde = QtWidgets.QPushButton(self.centralwidget)
         self.botaoVermelho = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAzul = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAmarelo = QtWidgets.QPushButton(self.centralwidget)
+        self.botaoSom = QtWidgets.QPushButton(self.centralwidget)
+        self.botaoConf = QtWidgets.QPushButton(self.centralwidget)
+        self.botaoTop = QtWidgets.QPushButton(self.centralwidget)
         self.logo = QtWidgets.QPushButton(self.centralwidget)
         self.botaoOnOff = QtWidgets.QPushButton(self.centralwidget)
         self.bg_logo = QtWidgets.QPushButton(self.centralwidget)
@@ -19,46 +29,55 @@ class Interface:
         self.statusbar = QtWidgets.QStatusBar(self.janela)
 
         self.configuraUi()
+        self.__configuraJanelaTop10()
         self.funcoesBotoes()
         self.efeitoInicializacao()
 
+    def __configuraJanelaTop10(self):
+        self.ranking.abrirArquivo()
+        self.ranking.ordenarTop10()
+        top10 = self.ranking.getTop10
+        self.ranking = ControleTop()
+        texto = "Classificação\tPontuação\tNome\n\n"
+
+        for i in range(10):
+            jogador = top10[i]
+            texto = str(texto) +(str(i+1) + "°\t\t" + str(jogador[1]) + '\t\t'  + str(jogador[0]) + '\n')
+
+        self.janelaTop10 = QtWidgets.QLabel(texto)
+        self.janelaTop10.setWindowTitle("Top 10")
+        self.janelaTop10.setObjectName("Top 10")
+        self.janelaTop10.resize(451,250)
+        self.janelaTop10.move(902, 83)
+        self.janelaTop10.setStyleSheet("background-color:#1d1d1d; color:green; font:bold 15px; subcontrol-position: right center")
+
+
     def efeitoInicializacao(self):
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/amarelo.ogg')
-        pygame.mixer.music.play(0)
+        self.pausa(1000)
+        self.som.tocarSomIntro()
+
         self.botaoAmarelo.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoAmarelo.setDown(False))
         self.botaoAmarelo.setCheckable(True)
         self.botaoAmarelo.setChecked(True)
 
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/azul.ogg')
-        pygame.mixer.music.play(0)
         self.botaoAzul.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoAzul.setDown(False))
         self.botaoAzul.setCheckable(True)
         self.botaoAzul.setChecked(True)
 
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/verde.ogg')
-        pygame.mixer.music.play(0)
         self.botaoVerde.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoVerde.setDown(False))
         self.botaoVerde.setCheckable(True)
         self.botaoVerde.setChecked(True)
 
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/vermelho.ogg')
-        pygame.mixer.music.play(0)
         self.botaoVermelho.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoVermelho.setDown(False))
         self.botaoVermelho.setCheckable(True)
         self.botaoVermelho.setChecked(True)
 
     def efeitoErro(self):
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/fail.ogg')
-        pygame.mixer.music.play(0)
+        self.som.tocaSomErro()
 
         self.botaoAmarelo.setDown(True)
         QtCore.QTimer.singleShot(2800, lambda: self.botaoAmarelo.setDown(False))
@@ -82,11 +101,29 @@ class Interface:
 
         self.pausa(2800)
 
+
+
+
     def configuraUi(self):
         self.janela.setObjectName("Genius")
-        self.janela.resize(451, 498)
+        self.janela.resize(451, 500)
         self.janela.setStyleSheet("background-color:#1d1d1d;")
         self.centralwidget.setObjectName("centralwidget")
+
+        self.inserirNome.move(89, 440)
+        self.inserirNome.resize(240, 40)
+        self.inserirNome.setStyleSheet("background-color:white; color:black; font:25px")
+        self.inserirNome.close()
+
+        self.botaoOK.resize(40,40)
+        self.botaoOK.move(340, 440)
+        self.botaoOK.setStyleSheet("background-color:grey; text: ok; color:black; font:15px")
+        self.botaoOK.close()
+
+        self.textoNome.resize(200,30)
+        self.textoNome.move(2, 410)
+        self.textoNome.setStyleSheet("background-color:transparent; color:green; font:15px")
+
         self.botaoVerde.setGeometry(QtCore.QRect(20, 20, 200, 200))
         self.botaoVerde.setStyleSheet("#botaoVerde{\n"
                                       "background-color:transparent;\n"
@@ -98,6 +135,7 @@ class Interface:
                                       "border-image: url(\"src/images/bt_verdeAct.png\");\n"
                                       "}")
         self.botaoVerde.setObjectName("botaoVerde")
+
         self.botaoVermelho.setGeometry(QtCore.QRect(230, 20, 200, 200))
         self.botaoVermelho.setStyleSheet("#botaoVermelho{\n"
                                          "background-color:transparent;\n"
@@ -109,6 +147,7 @@ class Interface:
                                          "border-image: url(\"src/images/bt_vermelhoAct.png\");\n"
                                          "}")
         self.botaoVermelho.setObjectName("botaoVermelho")
+
         self.botaoAzul.setGeometry(QtCore.QRect(230, 230, 200, 200))
         self.botaoAzul.setStyleSheet("#botaoAzul{\n"
                                      "background-color:transparent;\n"
@@ -120,6 +159,7 @@ class Interface:
                                      "border-image: url(\"src/images/bt_azulAct.png\");\n"
                                      "}")
         self.botaoAzul.setObjectName("botaoAzul")
+
         self.botaoAmarelo.setGeometry(QtCore.QRect(20, 230, 200, 200))
         self.botaoAmarelo.setStyleSheet("#botaoAmarelo{\n"
                                         "background-color:transparent;\n"
@@ -131,6 +171,35 @@ class Interface:
                                         "border-image: url(\"src/images/bt_amareloAct.png\");\n"
                                         "}")
         self.botaoAmarelo.setObjectName("botaoAmarelo")
+
+
+        self.botaoSom.setObjectName("botaoSom")
+        self.botaoSom.setGeometry(QtCore.QRect(145, 235, 40, 40))
+        self.botaoSom.setStyleSheet("#botaoSom{\n"
+                                      "background-color:transparent;\n"
+                                      "border-image: url(\"src/images/sound_on.png\");\n"
+                                      "}\n"
+                                      "")
+
+        self.botaoConf.setObjectName("botaoConf")
+        self.botaoConf.setGeometry(QtCore.QRect(265, 235, 40, 40))
+        self.botaoConf.setStyleSheet("#botaoConf{\n"
+                                    "background-color:transparent;\n"
+                                    "border-image: url(\"src/images/number_"+ str(self.som.tipo) + ".png\");\n"
+                                    "}\n"
+                                    "")
+
+        self.botaoTop.setObjectName("botaoTop")
+        self.botaoTop.setGeometry(QtCore.QRect(207, 243, 40, 40))
+        self.botaoTop.setStyleSheet("#botaoTop{\n"
+                                     "background-color:transparent;\n"
+                                     "border-image: url(\"src/images/top.png\");\n"
+                                     "}\n"
+                                     "")
+
+
+
+
         self.logo.setGeometry(QtCore.QRect(150, 160, 151, 41))
         self.logo.setStyleSheet("#logo{\n"
                                 "background-color:transparent;\n"
@@ -138,6 +207,7 @@ class Interface:
                                 "}\n"
                                 "")
         self.logo.setObjectName("logo")
+
         self.botaoOnOff.setGeometry(QtCore.QRect(200, 280, 51, 51))
         self.botaoOnOff.setStyleSheet("#botaoOnOff{\n"
                                       "background-color:transparent;\n"
@@ -145,6 +215,7 @@ class Interface:
                                       "}\n"
                                       "")
         self.botaoOnOff.setObjectName("botaoOnOff")
+
         self.bg_logo.setGeometry(QtCore.QRect(120, 120, 211, 101))
         self.bg_logo.setStyleSheet("#bg_logo{\n"
                                    "background-color:transparent;\n"
@@ -152,7 +223,8 @@ class Interface:
                                    "}\n"
                                    "")
         self.bg_logo.setObjectName("bg_logo")
-        self.pontuacao.setGeometry(QtCore.QRect(200, 240, 51, 31))
+
+        self.pontuacao.setGeometry(QtCore.QRect(200, 205, 51, 31))
         self.pontuacao.setMinimumSize(QtCore.QSize(41, 0))
         font = QtGui.QFont()
         font.setPointSize(14)
@@ -161,14 +233,19 @@ class Interface:
         self.pontuacao.setProperty("value", 0.0)
         self.pontuacao.setProperty("intValue", 0)
         self.pontuacao.setObjectName("pontuacao")
-        self.botaoAzul.raise_()
+
         self.bg_logo.raise_()
+        self.botaoAzul.raise_()
         self.botaoVermelho.raise_()
         self.botaoAmarelo.raise_()
+        self.botaoVerde.raise_()
+        self.botaoSom.raise_()
+        self.botaoConf.raise_()
+        self.botaoTop.raise_()
         self.logo.raise_()
         self.botaoOnOff.raise_()
-        self.botaoVerde.raise_()
         self.pontuacao.raise_()
+
         self.janela.setCentralWidget(self.centralwidget)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 451, 21))
         self.menubar.setObjectName("menubar")
@@ -185,6 +262,11 @@ class Interface:
         self.botaoAzul.clicked.connect(self.pressionarAzul)
         self.botaoVerde.clicked.connect(self.pressionarVerde)
         self.botaoVermelho.clicked.connect(self.pressionarVermelho)
+        self.botaoSom.clicked.connect(self.pressionarSom)
+        self.botaoConf.clicked.connect(self.pressionarConf)
+        self.botaoOK.clicked.connect(self.pressionarOK)
+        self.botaoTop.clicked.connect(self.pressionarTop)
+
 
     def atualizarPontuacao(self, pontuacao):
         self.pontuacao.display(pontuacao)
@@ -206,6 +288,42 @@ class Interface:
         self.ligarVermelho()
         self.mediador.botaoPressionado("vermelho")
 
+    def pressionarSom(self):
+        self.mediador.funcaoMudo()
+
+
+    def pressionarConf(self):
+        if self.som.tipo == self.som.maxTipo:
+            self.som.tipo = 1
+        else:
+            self.som.tipo += 1
+
+        self.botaoConf.setStyleSheet("#botaoConf{border-image: url(\"src/images/number_" + str(self.som.tipo) + ".png\")}")
+
+    def pressionarTop(self):
+        if self.janelaTop10.isVisible() == True:
+            self.janelaTop10.close()
+        else:
+            self.__configuraJanelaTop10()
+            self.janelaTop10.show()
+
+    def pressionarOK(self):
+        if self.inserirNome.text() == "":
+            self.textoNome.setStyleSheet("background-color:transparent; color:red; font:15px")
+            self.textoNome.showMessage('Nome Inválido!!!')
+        else:
+            pontuacao = int(self.mediador.getPontuacao)
+            nomeJogador = str(self.inserirNome.text())
+            self.ranking.addTop10(nomeJogador, pontuacao)
+            self.botaoOK.close()
+            self.inserirNome.close()
+            self.inserirNome.clear()
+            self.ranking = ControleTop()
+            self.textoNome.clearMessage()
+            self.textoNome.setStyleSheet("background-color:transparent; color:green; font:15px")
+            self.__configuraJanelaTop10()
+
+
     @staticmethod
     def pausa(ms=1000):
         QtTest.QTest.qWait(ms)
@@ -220,8 +338,9 @@ class Interface:
         self.habilitarBotoes()
 
     def jogadaErrada(self):
-        self.efeitoErro()
         self.desligarJogo()
+        self.efeitoErro()
+
 
     def desligarJogo(self):
         self.botaoOnOff.setStyleSheet("#botaoOnOff{\n"
@@ -270,42 +389,58 @@ class Interface:
         self.botaoVerde.setEnabled(True)
         self.botaoVermelho.setEnabled(True)
 
+    def ligarVermelho(self):
+        self.som.tocaSomVermelho()
+        self.botaoVermelho.setDown(True)
+        QtCore.QTimer.singleShot(400, lambda: self.botaoVermelho.setDown(False))
+        self.botaoVermelho.setCheckable(True)
+        self.botaoVermelho.setChecked(True)
+        self.pausa(400)
+
     def ligarAmarelo(self):
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/amarelo.ogg')
-        pygame.mixer.music.play(0)
+        self.som.tocaSomAmarelo()
         self.botaoAmarelo.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoAmarelo.setDown(False))
         self.botaoAmarelo.setCheckable(True)
         self.botaoAmarelo.setChecked(True)
         self.pausa(400)
 
-    def ligarAzul(self):
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/azul.ogg')
-        pygame.mixer.music.play(0)
-        self.botaoAzul.setDown(True)
-        QtCore.QTimer.singleShot(400, lambda: self.botaoAzul.setDown(False))
-        self.botaoAzul.setCheckable(True)
-        self.botaoAzul.setChecked(True)
-        self.pausa(400)
-
     def ligarVerde(self):
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/verde.ogg')
-        pygame.mixer.music.play(0)
+        self.som.tocaSomVerde()
         self.botaoVerde.setDown(True)
         QtCore.QTimer.singleShot(400, lambda: self.botaoVerde.setDown(False))
         self.botaoVerde.setCheckable(True)
         self.botaoVerde.setChecked(True)
         self.pausa(400)
 
-    def ligarVermelho(self):
-        pygame.mixer.init()
-        pygame.mixer.music.load('src/sounds/vermelho.ogg')
-        pygame.mixer.music.play(0)
-        self.botaoVermelho.setDown(True)
-        QtCore.QTimer.singleShot(400, lambda: self.botaoVermelho.setDown(False))
-        self.botaoVermelho.setCheckable(True)
-        self.botaoVermelho.setChecked(True)
+    def ligarAzul(self):
+        self.som.tocaSomAzul()
+        self.botaoAzul.setDown(True)
+        QtCore.QTimer.singleShot(400, lambda: self.botaoAzul.setDown(False))
+        self.botaoAzul.setCheckable(True)
+        self.botaoAzul.setChecked(True)
         self.pausa(400)
+
+    def ativarMudo(self):
+        self.som.volume = 0
+        self.botaoSom.setStyleSheet("#botaoSom{\n"
+                                    "background-color:transparent;\n"
+                                    "border-image: url(\"src/images/sound_off.png\");\n"
+                                    "}\n"
+                                    "")
+
+    def desativarMudo(self):
+        self.som.volume = 1
+        self.som.tipo = 4
+        self.botaoSom.setStyleSheet("#botaoSom{\n"
+                                    "background-color:transparent;\n"
+                                    "border-image: url(\"src/images/sound_on.png\");\n"
+                                    "}\n"
+                                    "")
+
+    def solicitarNome(self):
+        pontuacao = self.mediador.getPontuacao
+        if self.ranking.estaNoTop10(pontuacao) == True:
+            self.inserirNome.show()
+            self.botaoOK.show()
+            self.textoNome.showMessage('Insira seu nome')

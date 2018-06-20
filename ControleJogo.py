@@ -6,6 +6,7 @@ class ControleJogo:
         self.mediador = mediador
         self.coresSequencia = None
         self.jogoIniciado = False
+        self._jogoMudo = False
         self.jogada = 0
         self.pontos = 0
 
@@ -45,6 +46,14 @@ class ControleJogo:
     @property
     def estaLigado(self):
         return self.jogoIniciado
+
+    @property
+    def estaMudo(self):
+        return self._jogoMudo
+
+    @estaMudo.setter
+    def estaMudo(self, val):
+        self._jogoMudo = val
 
     def desligarJogo(self):
         self.coresSequencia = None
