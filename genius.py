@@ -14,5 +14,6 @@ if __name__ == "__main__":
     mediador.definirControle(controle)
     mediador.definirInterface(interface)
 
+
     Genius.show()
     sys.exit(app.exec_())
