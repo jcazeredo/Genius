@@ -9,6 +9,7 @@ class Interface:
         self.__janela = janela
         self.__som = ControleSom()
         self.__ranking = ControleTop()
+        self.__tempoIntervalo = 500
 
         self.__configuraUi()
         self.__funcoesBotoes()
@@ -349,15 +350,6 @@ class Interface:
         QtTest.QTest.qWait(ms)
 
 
-    def __desligarJogo(self):
-        self.__botaoOnOff.setStyleSheet("#botaoOnOff{\n"
-                                      "background-color:transparent;\n"
-                                      "border-image: url(\"src/images/bt_off.png\");\n"
-                                      "}\n"
-                                      "")
-
-        self.__desabilitarBotoes()
-
     def __desabilitarBotoes(self):
         self.__botaoAmarelo.setEnabled(False)
         self.__botaoAzul.setEnabled(False)
@@ -376,7 +368,6 @@ class Interface:
         QtCore.QTimer.singleShot(400, lambda: self.__botaoVermelho.setDown(False))
         self.__botaoVermelho.setCheckable(True)
         self.__botaoVermelho.setChecked(True)
-        self.__pausa(400)
 
     def __ligarAmarelo(self):
         self.__som.tocaSomAmarelo()
@@ -384,7 +375,6 @@ class Interface:
         QtCore.QTimer.singleShot(400, lambda: self.__botaoAmarelo.setDown(False))
         self.__botaoAmarelo.setCheckable(True)
         self.__botaoAmarelo.setChecked(True)
-        self.__pausa(400)
 
     def __ligarVerde(self):
         self.__som.tocaSomVerde()
@@ -392,7 +382,6 @@ class Interface:
         QtCore.QTimer.singleShot(400, lambda: self.__botaoVerde.setDown(False))
         self.__botaoVerde.setCheckable(True)
         self.__botaoVerde.setChecked(True)
-        self.__pausa(400)
 
     def __ligarAzul(self):
         self.__som.tocaSomAzul()
@@ -400,7 +389,6 @@ class Interface:
         QtCore.QTimer.singleShot(400, lambda: self.__botaoAzul.setDown(False))
         self.__botaoAzul.setCheckable(True)
         self.__botaoAzul.setChecked(True)
-        self.__pausa(400)
 
 
 
@@ -413,34 +401,43 @@ class Interface:
         self.__pausa(500)
         self.__habilitarBotoes()
 
+    def desligarJogo(self):
+        self.__botaoOnOff.setStyleSheet("#botaoOnOff{\n"
+                                      "background-color:transparent;\n"
+                                      "border-image: url(\"src/images/bt_off.png\");\n"
+                                      "}\n"
+                                      "")
+
+        self.__desabilitarBotoes()
+
     def tocaSequencia(self, sequencia):
         for cor in sequencia:
             if cor == "amarelo":
                 self.__desabilitarBotoes()
                 self.__ligarAmarelo()
-                self.__pausa(300)
+                self.__pausa(self.__tempoIntervalo)
                 self.__habilitarBotoes()
 
             elif cor == "azul":
                 self.__desabilitarBotoes()
                 self.__ligarAzul()
-                self.__pausa(300)
+                self.__pausa(self.__tempoIntervalo)
                 self.__habilitarBotoes()
 
             elif cor == "verde":
                 self.__desabilitarBotoes()
                 self.__ligarVerde()
-                self.__pausa(300)
+                self.__pausa(self.__tempoIntervalo)
                 self.__habilitarBotoes()
 
             elif cor == "vermelho":
                 self.__desabilitarBotoes()
                 self.__ligarVermelho()
-                self.__pausa(300)
+                self.__pausa(self.__tempoIntervalo)
                 self.__habilitarBotoes()
 
     def jogadaErrada(self):
-        self.__desligarJogo()
+        self.desligarJogo()
         self.__efeitoErro()
 
     def atualizarPontuacao(self, pontuacao):
