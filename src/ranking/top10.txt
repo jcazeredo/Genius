@@ -1,10 +1,10 @@
 Pimenta;15
 Paloma;13
-Leonardo Lauryel;11
+Roger;13
+Alice;11
+Leonardo Lauryel;10
 Julio Cesar;9
 Juan Suzano;8
 Ian Fischer;7
-Jurema;6
-Joice;3
-Lucas;2
-Ricardo;1
+Valentina;6
+Bruna;1
