@@ -26,7 +26,6 @@ class ControleTop:
         arquivo.writelines(texto)
         arquivo.close()
 
-
     def ordenarTop10(self):
         top10_Ordenado = sorted(self.__top10.items(), key=operator.itemgetter(1), reverse=True)
         self.__top10 = top10_Ordenado
