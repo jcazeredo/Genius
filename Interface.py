@@ -235,28 +235,27 @@ class Interface:
         self.__botaoConf.raise_()
 
     def __efeitoInicializacao(self):
-        self.__pausa(1000)
         self.__som.tocarSomIntro()
 
-        self.__botaoAmarelo.setDown(True)
-        QtCore.QTimer.singleShot(400, lambda: self.__botaoAmarelo.setDown(False))
-        self.__botaoAmarelo.setCheckable(True)
-        self.__botaoAmarelo.setChecked(True)
-
-        self.__botaoAzul.setDown(True)
-        QtCore.QTimer.singleShot(400, lambda: self.__botaoAzul.setDown(False))
-        self.__botaoAzul.setCheckable(True)
-        self.__botaoAzul.setChecked(True)
-
         self.__botaoVerde.setDown(True)
-        QtCore.QTimer.singleShot(400, lambda: self.__botaoVerde.setDown(False))
+        QtCore.QTimer.singleShot(500, lambda: self.__botaoVerde.setDown(False))
         self.__botaoVerde.setCheckable(True)
         self.__botaoVerde.setChecked(True)
 
         self.__botaoVermelho.setDown(True)
-        QtCore.QTimer.singleShot(400, lambda: self.__botaoVermelho.setDown(False))
+        QtCore.QTimer.singleShot(1318, lambda: self.__botaoVermelho.setDown(False))
         self.__botaoVermelho.setCheckable(True)
         self.__botaoVermelho.setChecked(True)
+
+        self.__botaoAzul.setDown(True)
+        QtCore.QTimer.singleShot(2132, lambda: self.__botaoAzul.setDown(False))
+        self.__botaoAzul.setCheckable(True)
+        self.__botaoAzul.setChecked(True)
+
+        self.__botaoAmarelo.setDown(True)
+        QtCore.QTimer.singleShot(2749, lambda: self.__botaoAmarelo.setDown(False))
+        self.__botaoAmarelo.setCheckable(True)
+        self.__botaoAmarelo.setChecked(True)
 
     def __efeitoErro(self):
         self.__som.tocaSomErro()
