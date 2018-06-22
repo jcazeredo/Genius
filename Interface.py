@@ -29,9 +29,38 @@ class Interface:
         self.statusbar = QtWidgets.QStatusBar(self.janela)
 
         self.configuraUi()
-        self.__configuraJanelaTop10()
         self.funcoesBotoes()
         self.efeitoInicializacao()
+
+    def configuraUi(self):
+        self.__configuraJanela()
+        self.__configuraJanelaTop10()
+        self.__configuraBotaoVermelho()
+        self.__configuraBotaoAmarelo()
+        self.__configuraBotaoVerde()
+        self.__configuraBotaoAzul()
+        self.__configuraBotaoOnOff()
+        self.__configuraBotaoSom()
+        self.__configuraBotaoTop()
+        self.__configuraBotaoConf()
+        self.__configuraFundoLogo()
+        self.__configuraLogo()
+        self.__configuraDisplay()
+        self.__configuraCaixaInserirNome()
+        self.__configuraBotaoOK()
+        self.__configuraTextoInfo()
+        self.__configuraCamadasWidgets()
+
+
+        self.janela.setCentralWidget(self.centralwidget)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 451, 21))
+        self.menubar.setObjectName("menubar")
+        self.janela.setMenuBar(self.menubar)
+        self.statusbar.setObjectName("statusbar")
+        self.janela.setStatusBar(self.statusbar)
+        _translate = QtCore.QCoreApplication.translate
+        self.janela.setWindowTitle(_translate("Genius", "Genius"))
+        QtCore.QMetaObject.connectSlotsByName(self.janela)
 
     def __configuraJanelaTop10(self):
         self.ranking.abrirArquivo()
@@ -50,6 +79,160 @@ class Interface:
         self.janelaTop10.resize(451,250)
         self.janelaTop10.move(902, 83)
         self.janelaTop10.setStyleSheet("background-color:#1d1d1d; color:green; font:bold 15px; subcontrol-position: right center")
+
+    def __configuraJanela(self):
+        self.janela.setObjectName("Genius")
+        self.janela.resize(451, 500)
+        self.janela.setStyleSheet("background-color:#1d1d1d;")
+        self.centralwidget.setObjectName("centralwidget")
+
+    def __configuraBotaoVermelho(self):
+        self.botaoVermelho.setObjectName("botaoVermelho")
+        self.botaoVermelho.setGeometry(QtCore.QRect(230, 20, 200, 200))
+        self.botaoVermelho.setStyleSheet("#botaoVermelho{\n"
+                                         "background-color:transparent;\n"
+                                         "border-image: url(\"src/images/bt_vermelho.png\");\n"
+                                         "}\n"
+                                         "\n"
+                                         "#botaoVermelho:pressed{\n"
+                                         "background-color:transparent;\n"
+                                         "border-image: url(\"src/images/bt_vermelhoAct.png\");\n"
+                                         "}")
+
+    def __configuraBotaoAmarelo(self):
+        self.botaoAmarelo.setObjectName("botaoAmarelo")
+        self.botaoAmarelo.setGeometry(QtCore.QRect(20, 230, 200, 200))
+        self.botaoAmarelo.setStyleSheet("#botaoAmarelo{\n"
+                                        "background-color:transparent;\n"
+                                        "border-image: url(\"src/images/bt_amarelo.png\");\n"
+                                        "}\n"
+                                        "\n"
+                                        "#botaoAmarelo:pressed{\n"
+                                        "background-color:transparent;\n"
+                                        "border-image: url(\"src/images/bt_amareloAct.png\");\n"
+                                        "}")
+
+    def __configuraBotaoVerde(self):
+        self.botaoVerde.setObjectName("botaoVerde")
+        self.botaoVerde.setGeometry(QtCore.QRect(20, 20, 200, 200))
+        self.botaoVerde.setStyleSheet("#botaoVerde{\n"
+                                      "background-color:transparent;\n"
+                                      "border-image: url(\"src/images/bt_verde.png\");\n"
+                                      "}\n"
+                                      "\n"
+                                      "#botaoVerde:pressed{\n"
+                                      "background-color:transparent;\n"
+                                      "border-image: url(\"src/images/bt_verdeAct.png\");\n"
+                                      "}")
+
+    def __configuraBotaoAzul(self):
+        self.botaoAzul.setObjectName("botaoAzul")
+        self.botaoAzul.setGeometry(QtCore.QRect(230, 230, 200, 200))
+        self.botaoAzul.setStyleSheet("#botaoAzul{\n"
+                                     "background-color:transparent;\n"
+                                     "border-image: url(\"src/images/bt_azul.png\");\n"
+                                     "}\n"
+                                     "\n"
+                                     "#botaoAzul:pressed{\n"
+                                     "background-color:transparent;\n"
+                                     "border-image: url(\"src/images/bt_azulAct.png\");\n"
+                                     "}")
+
+    def __configuraBotaoOnOff(self):
+        self.botaoOnOff.setObjectName("botaoOnOff")
+        self.botaoOnOff.setGeometry(QtCore.QRect(200, 280, 51, 51))
+        self.botaoOnOff.setStyleSheet("#botaoOnOff{\n"
+                                      "background-color:transparent;\n"
+                                      "border-image: url(\"src/images/bt_off.png\");\n"
+                                      "}\n"
+                                      "")
+
+    def __configuraBotaoSom(self):
+        self.botaoSom.setObjectName("botaoSom")
+        self.botaoSom.setGeometry(QtCore.QRect(145, 235, 40, 40))
+        self.botaoSom.setStyleSheet("#botaoSom{\n"
+                                    "background-color:transparent;\n"
+                                    "border-image: url(\"src/images/sound_on.png\");\n"
+                                    "}\n"
+                                    "")
+
+    def __configuraBotaoTop(self):
+        self.botaoTop.setObjectName("botaoTop")
+        self.botaoTop.setGeometry(QtCore.QRect(207, 243, 40, 40))
+        self.botaoTop.setStyleSheet("#botaoTop{\n"
+                                    "background-color:transparent;\n"
+                                    "border-image: url(\"src/images/top.png\");\n"
+                                    "}\n"
+                                    "")
+
+    def __configuraBotaoConf(self):
+        self.botaoConf.setObjectName("botaoConf")
+        self.botaoConf.setGeometry(QtCore.QRect(265, 235, 40, 40))
+        self.botaoConf.setStyleSheet("#botaoConf{\n"
+                                     "background-color:transparent;\n"
+                                     "border-image: url(\"src/images/number_" + str(self.som.tipo) + ".png\");\n"
+                                     "}\n"
+                                     "")
+
+    def __configuraFundoLogo(self):
+        self.bg_logo.setObjectName("bg_logo")
+        self.bg_logo.setGeometry(QtCore.QRect(120, 120, 211, 101))
+        self.bg_logo.setStyleSheet("#bg_logo{\n"
+                                   "background-color:transparent;\n"
+                                   "border-image: url(\"src/images/bg_logo.png\");\n"
+                                   "}\n"
+                                   "")
+
+    def __configuraLogo(self):
+        self.logo.setObjectName("logo")
+        self.logo.setGeometry(QtCore.QRect(150, 160, 151, 41))
+        self.logo.setStyleSheet("#logo{\n"
+                                "background-color:transparent;\n"
+                                "border-image: url(\"src/images/logo.png\");\n"
+                                "}\n"
+                                "")
+
+    def __configuraDisplay(self):
+        self.pontuacao.setObjectName("pontuacao")
+        self.pontuacao.setGeometry(QtCore.QRect(200, 205, 51, 31))
+        self.pontuacao.setMinimumSize(QtCore.QSize(41, 0))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setKerning(True)
+        self.pontuacao.setFont(font)
+        self.pontuacao.setProperty("value", 0.0)
+        self.pontuacao.setProperty("intValue", 0)
+
+    def __configuraCaixaInserirNome(self):
+        self.inserirNome.move(89, 440)
+        self.inserirNome.resize(240, 40)
+        self.inserirNome.setStyleSheet("background-color:white; color:black; font:25px")
+        self.inserirNome.close()
+
+    def __configuraBotaoOK(self):
+        self.botaoOK.resize(40, 40)
+        self.botaoOK.move(340, 440)
+        self.botaoOK.setStyleSheet("background-color:grey; text: ok; color:black; font:15px")
+        self.botaoOK.close()
+
+    def __configuraTextoInfo(self):
+        self.textoNome.resize(200, 30)
+        self.textoNome.move(2, 410)
+        self.textoNome.setStyleSheet("background-color:transparent; color:green; font:15px")
+
+    def __configuraCamadasWidgets(self):
+        self.bg_logo.raise_()
+        self.logo.raise_()
+        self.botaoVermelho.raise_()
+        self.botaoAmarelo.raise_()
+        self.botaoVerde.raise_()
+        self.botaoAzul.raise_()
+        self.pontuacao.raise_()
+        self.botaoOnOff.raise_()
+        self.botaoSom.raise_()
+        self.botaoTop.raise_()
+        self.botaoConf.raise_()
+
 
 
     def efeitoInicializacao(self):
@@ -104,157 +287,7 @@ class Interface:
 
 
 
-    def configuraUi(self):
-        self.janela.setObjectName("Genius")
-        self.janela.resize(451, 500)
-        self.janela.setStyleSheet("background-color:#1d1d1d;")
-        self.centralwidget.setObjectName("centralwidget")
 
-        self.inserirNome.move(89, 440)
-        self.inserirNome.resize(240, 40)
-        self.inserirNome.setStyleSheet("background-color:white; color:black; font:25px")
-        self.inserirNome.close()
-
-        self.botaoOK.resize(40,40)
-        self.botaoOK.move(340, 440)
-        self.botaoOK.setStyleSheet("background-color:grey; text: ok; color:black; font:15px")
-        self.botaoOK.close()
-
-        self.textoNome.resize(200,30)
-        self.textoNome.move(2, 410)
-        self.textoNome.setStyleSheet("background-color:transparent; color:green; font:15px")
-
-        self.botaoVerde.setGeometry(QtCore.QRect(20, 20, 200, 200))
-        self.botaoVerde.setStyleSheet("#botaoVerde{\n"
-                                      "background-color:transparent;\n"
-                                      "border-image: url(\"src/images/bt_verde.png\");\n"
-                                      "}\n"
-                                      "\n"
-                                      "#botaoVerde:pressed{\n"
-                                      "background-color:transparent;\n"
-                                      "border-image: url(\"src/images/bt_verdeAct.png\");\n"
-                                      "}")
-        self.botaoVerde.setObjectName("botaoVerde")
-
-        self.botaoVermelho.setGeometry(QtCore.QRect(230, 20, 200, 200))
-        self.botaoVermelho.setStyleSheet("#botaoVermelho{\n"
-                                         "background-color:transparent;\n"
-                                         "border-image: url(\"src/images/bt_vermelho.png\");\n"
-                                         "}\n"
-                                         "\n"
-                                         "#botaoVermelho:pressed{\n"
-                                         "background-color:transparent;\n"
-                                         "border-image: url(\"src/images/bt_vermelhoAct.png\");\n"
-                                         "}")
-        self.botaoVermelho.setObjectName("botaoVermelho")
-
-        self.botaoAzul.setGeometry(QtCore.QRect(230, 230, 200, 200))
-        self.botaoAzul.setStyleSheet("#botaoAzul{\n"
-                                     "background-color:transparent;\n"
-                                     "border-image: url(\"src/images/bt_azul.png\");\n"
-                                     "}\n"
-                                     "\n"
-                                     "#botaoAzul:pressed{\n"
-                                     "background-color:transparent;\n"
-                                     "border-image: url(\"src/images/bt_azulAct.png\");\n"
-                                     "}")
-        self.botaoAzul.setObjectName("botaoAzul")
-
-        self.botaoAmarelo.setGeometry(QtCore.QRect(20, 230, 200, 200))
-        self.botaoAmarelo.setStyleSheet("#botaoAmarelo{\n"
-                                        "background-color:transparent;\n"
-                                        "border-image: url(\"src/images/bt_amarelo.png\");\n"
-                                        "}\n"
-                                        "\n"
-                                        "#botaoAmarelo:pressed{\n"
-                                        "background-color:transparent;\n"
-                                        "border-image: url(\"src/images/bt_amareloAct.png\");\n"
-                                        "}")
-        self.botaoAmarelo.setObjectName("botaoAmarelo")
-
-
-        self.botaoSom.setObjectName("botaoSom")
-        self.botaoSom.setGeometry(QtCore.QRect(145, 235, 40, 40))
-        self.botaoSom.setStyleSheet("#botaoSom{\n"
-                                      "background-color:transparent;\n"
-                                      "border-image: url(\"src/images/sound_on.png\");\n"
-                                      "}\n"
-                                      "")
-
-        self.botaoConf.setObjectName("botaoConf")
-        self.botaoConf.setGeometry(QtCore.QRect(265, 235, 40, 40))
-        self.botaoConf.setStyleSheet("#botaoConf{\n"
-                                    "background-color:transparent;\n"
-                                    "border-image: url(\"src/images/number_"+ str(self.som.tipo) + ".png\");\n"
-                                    "}\n"
-                                    "")
-
-        self.botaoTop.setObjectName("botaoTop")
-        self.botaoTop.setGeometry(QtCore.QRect(207, 243, 40, 40))
-        self.botaoTop.setStyleSheet("#botaoTop{\n"
-                                     "background-color:transparent;\n"
-                                     "border-image: url(\"src/images/top.png\");\n"
-                                     "}\n"
-                                     "")
-
-
-
-
-        self.logo.setGeometry(QtCore.QRect(150, 160, 151, 41))
-        self.logo.setStyleSheet("#logo{\n"
-                                "background-color:transparent;\n"
-                                "border-image: url(\"src/images/logo.png\");\n"
-                                "}\n"
-                                "")
-        self.logo.setObjectName("logo")
-
-        self.botaoOnOff.setGeometry(QtCore.QRect(200, 280, 51, 51))
-        self.botaoOnOff.setStyleSheet("#botaoOnOff{\n"
-                                      "background-color:transparent;\n"
-                                      "border-image: url(\"src/images/bt_off.png\");\n"
-                                      "}\n"
-                                      "")
-        self.botaoOnOff.setObjectName("botaoOnOff")
-
-        self.bg_logo.setGeometry(QtCore.QRect(120, 120, 211, 101))
-        self.bg_logo.setStyleSheet("#bg_logo{\n"
-                                   "background-color:transparent;\n"
-                                   "border-image: url(\"src/images/bg_logo.png\");\n"
-                                   "}\n"
-                                   "")
-        self.bg_logo.setObjectName("bg_logo")
-
-        self.pontuacao.setGeometry(QtCore.QRect(200, 205, 51, 31))
-        self.pontuacao.setMinimumSize(QtCore.QSize(41, 0))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        font.setKerning(True)
-        self.pontuacao.setFont(font)
-        self.pontuacao.setProperty("value", 0.0)
-        self.pontuacao.setProperty("intValue", 0)
-        self.pontuacao.setObjectName("pontuacao")
-
-        self.bg_logo.raise_()
-        self.botaoAzul.raise_()
-        self.botaoVermelho.raise_()
-        self.botaoAmarelo.raise_()
-        self.botaoVerde.raise_()
-        self.botaoSom.raise_()
-        self.botaoConf.raise_()
-        self.botaoTop.raise_()
-        self.logo.raise_()
-        self.botaoOnOff.raise_()
-        self.pontuacao.raise_()
-
-        self.janela.setCentralWidget(self.centralwidget)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 451, 21))
-        self.menubar.setObjectName("menubar")
-        self.janela.setMenuBar(self.menubar)
-        self.statusbar.setObjectName("statusbar")
-        self.janela.setStatusBar(self.statusbar)
-        _translate = QtCore.QCoreApplication.translate
-        self.janela.setWindowTitle(_translate("Genius", "Genius"))
-        QtCore.QMetaObject.connectSlotsByName(self.janela)
 
     def funcoesBotoes(self):
         self.botaoOnOff.clicked.connect(self.mediador.ligarDesligar)
