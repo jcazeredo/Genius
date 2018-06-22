@@ -6,7 +6,7 @@ class ControleSom:
         pygame.mixer.init()
         self._volume = 1
         self._tipo = 1
-        self._maxTipo = 4
+        self._maxTipo = 5
         self._somBtVermelho = pygame.mixer.Sound("src/sounds/som_vermelho_" + str(self._tipo) + ".ogg")
         self._somBtAmarelo = pygame.mixer.Sound("src/sounds/som_amarelo_" + str(self._tipo) + ".ogg")
         self._somBtVerde = pygame.mixer.Sound("src/sounds/som_verde_" + str(self._tipo) + ".ogg")
@@ -65,11 +65,3 @@ class ControleSom:
 
     def tocarSomIntro(self):
         self._somIntro.play()
-
-
-
-# reference
-# https://stackoverflow.com/questions/43034494/changing-volume-in-pygame-mixer-almost-no-effect
-
-# paara fazer o top 10
-# https://pythonspot.com/en/pyqt5-form-layout/
