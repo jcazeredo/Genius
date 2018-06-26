@@ -453,7 +453,6 @@ class Interface:
 
     def desativarMudo(self):
         self.__som.volume = 1
-        self.__som.tipo = 4
         self.__botaoSom.setStyleSheet("#botaoSom{\n"
                                       "background-color:transparent;\n"
                                       "border-image: url(\"src/images/sound_on.png\");\n"
